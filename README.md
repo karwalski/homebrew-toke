@@ -43,4 +43,4 @@ brew upgrade ooke
 - Language website: https://tokelang.dev
 - Compiler source: https://github.com/karwalski/toke
 - Canonical description of toke: https://github.com/karwalski/toke/blob/main/docs/about/canonical.md
-- Web framework source: https://github.com/karwalski/toke-ooke
+- Web framework source: https://github.com/karwalski/ooke
