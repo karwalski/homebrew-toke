@@ -4,8 +4,8 @@
 class Ooke < Formula
   desc "Toke web framework and CMS"
   homepage "https://tokelang.dev"
-  version "0.1.0"
-  license "MIT"
+  version "3.0.0"
+  license "Apache-2.0"
 
   depends_on "karwalski/toke/tkc"
 

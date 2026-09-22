@@ -4,8 +4,8 @@
 class Tkc < Formula
   desc "Toke programming language compiler"
   homepage "https://tokelang.dev"
-  version "0.3.0"
-  license "MIT"
+  version "3.0.0"
+  license "Apache-2.0"
 
   on_macos do
     if Hardware::CPU.arm?
