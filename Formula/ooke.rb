@@ -9,20 +9,27 @@ class Ooke < Formula
 
   depends_on "karwalski/toke/tkc"
 
+  # ooke's release workflow uses the same naming as toke's:
+  # `ooke-${GITHUB_REF_NAME}-${os}-${arch}.tar.gz` -- REF_NAME carries the
+  # leading v, the os is `macos` not `darwin`, and 64-bit Intel is `x86_64`
+  # not `amd64`. See the note in tkc.rb; all three differed here too.
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/karwalski/ooke/releases/download/v#{version}/ooke-#{version}-darwin-arm64.tar.gz"
-      sha256 "PLACEHOLDER_SHA256_DARWIN_ARM64"
+      url "https://github.com/karwalski/ooke/releases/download/v#{version}/ooke-v#{version}-macos-arm64.tar.gz"
+      sha256 "PLACEHOLDER_SHA256_MACOS_ARM64"
     else
-      url "https://github.com/karwalski/ooke/releases/download/v#{version}/ooke-#{version}-darwin-amd64.tar.gz"
-      sha256 "PLACEHOLDER_SHA256_DARWIN_AMD64"
+      url "https://github.com/karwalski/ooke/releases/download/v#{version}/ooke-v#{version}-macos-x86_64.tar.gz"
+      sha256 "PLACEHOLDER_SHA256_MACOS_X86_64"
     end
   end
 
   on_linux do
-    if Hardware::CPU.intel?
-      url "https://github.com/karwalski/ooke/releases/download/v#{version}/ooke-#{version}-linux-amd64.tar.gz"
-      sha256 "PLACEHOLDER_SHA256_LINUX_AMD64"
+    if Hardware::CPU.arm?
+      url "https://github.com/karwalski/ooke/releases/download/v#{version}/ooke-v#{version}-linux-arm64.tar.gz"
+      sha256 "PLACEHOLDER_SHA256_LINUX_ARM64"
+    else
+      url "https://github.com/karwalski/ooke/releases/download/v#{version}/ooke-v#{version}-linux-x86_64.tar.gz"
+      sha256 "PLACEHOLDER_SHA256_LINUX_X86_64"
     end
   end
 
