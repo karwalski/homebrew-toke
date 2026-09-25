@@ -34,12 +34,35 @@ class Tkc < Formula
     end
   end
 
+  # The tarball is laid out as .github/workflows/release.yml's "Package
+  # release tarball" step builds it, and tkc needs that layout intact:
+  #   tkc              the compiler, built with TKC_STDLIB_DIR="src/stdlib"
+  #   src/stdlib/      the runtime C sources every program links (tk_runtime.c
+  #                    and the rest); tkc finds them beside its executable
+  #   stdlib/*.tki     interfaces, read from <src/stdlib>/../../stdlib
+  #   stdlib/vendor/   cmark, tomlc99, miniz, the same two levels up
+  # tkc resolves its stdlib (toke 127.179) from $TKC_STDLIB_DIR, else an
+  # absolute built-in path, else beside the real path of the executable. So
+  # the whole tree goes under libexec unchanged and bin/tkc is a symlink:
+  # the symlink resolves to libexec/tkc, whose src/stdlib is right beside it.
+  # Until 132.97 the formula installed only bin/tkc and libexec/*.tki, and a
+  # brewed tkc built nothing (E9022: stdlib directory not found).
   def install
-    bin.install "tkc"
-    libexec.install Dir["stdlib/*"] if Dir.exist?("stdlib")
+    libexec.install "tkc"
+    (libexec/"src").install "src/stdlib"
+    libexec.install "stdlib"
+    bin.install_symlink libexec/"tkc"
   end
 
   test do
-    system "#{bin}/tkc", "--version"
+    # Build and run a program, not just --version: that is what needs the
+    # runtime sources and the interfaces to be where tkc looks for them.
+    (testpath/"hello.tk").write <<~EOS
+      m=hello;
+      i=io:std.io;
+      f=main():i64{io.println("hello from tkc");<0};
+    EOS
+    system bin/"tkc", "hello.tk", "--out", "hello"
+    assert_equal "hello from tkc\n", shell_output("./hello")
   end
 end
