@@ -33,8 +33,20 @@ class Ooke < Formula
     end
   end
 
+  # Story 134.46: `ooke compile` runs scripts/gen_app_makefile.sh, which
+  # needs ooke's Makefile, src/ (module sources, interfaces and the compiled
+  # modules under src/ooke/) and a toke tree. The release tarball carries the
+  # installation tree ooke's scripts/stage_install.sh lays out; it is installed
+  # whole under libexec, and bin/ooke is a wrapper that points ooke at it
+  # (OOKE_ROOT) and at the tkc formula's tree (TOKE_ROOT, TKC) -- ooke does not
+  # follow a symlinked binary, so a plain symlink would find no scripts.
   def install
-    bin.install "ooke"
+    libexec.install Dir["*"]
+    tkc = Formula["karwalski/toke/tkc"]
+    (bin/"ooke").write_env_script libexec/"ooke",
+      OOKE_ROOT: libexec,
+      TOKE_ROOT: tkc.opt_libexec,
+      TKC:       tkc.opt_bin/"tkc"
   end
 
   test do
