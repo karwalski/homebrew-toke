@@ -11,6 +11,13 @@ in the toke repository. Every number published about toke comes from
 [`docs/metrics-baseline.md`](https://github.com/karwalski/toke/blob/main/docs/metrics-baseline.md)
 and nowhere else.
 
+## Status
+
+**Not installable yet.** The formulae carry placeholder checksums until the
+release artefacts they download are published (toke story 132.27); until
+then `brew install` fails its checksum check. Build from source meanwhile:
+see the compiler and framework repositories linked below.
+
 ## Installation
 
 ```sh
