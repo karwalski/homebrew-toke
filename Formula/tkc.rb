@@ -54,6 +54,21 @@ class Tkc < Formula
     bin.install_symlink libexec/"tkc"
   end
 
+  # toke 132.122: tkc runs the clang whose absolute path was baked in when the
+  # release binary was built (TKC_CLANG_PATH, the build runner's
+  # `command -v clang`); it never searches $PATH. On a machine whose clang is
+  # elsewhere every build fails with E9027 (exit 3) until TKC_CC is set.
+  # Whether the formula should set TKC_CC itself, build from source, or tkc
+  # should gain a relocatable lookup is an open owner decision (132.122).
+  def caveats
+    <<~EOS
+      tkc runs the clang found where this release was built, not the one on
+      your PATH. If builds fail with E9027, point it at your clang:
+        export TKC_CC="$(command -v clang)"
+      (see https://tokelang.dev/docs/learn/install/ "Packaged installs").
+    EOS
+  end
+
   test do
     # Build and run a program, not just --version: that is what needs the
     # runtime sources and the interfaces to be where tkc looks for them.
