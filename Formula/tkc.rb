@@ -5,7 +5,7 @@ class Tkc < Formula
   desc "Toke programming language compiler"
   homepage "https://tokelang.dev"
   version "3.0.0"
-  license "Apache-2.0"
+  license all_of: ["Apache-2.0", "MIT"]
 
   # The filenames below are what .github/workflows/release.yml actually
   # produces: `tkc-${GITHUB_REF_NAME}-${os}-${arch}.tar.gz`, where REF_NAME is

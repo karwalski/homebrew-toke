@@ -51,3 +51,10 @@ brew upgrade ooke
 - Compiler source: https://github.com/karwalski/toke
 - Canonical description of toke: https://github.com/karwalski/toke/blob/main/docs/about/canonical.md
 - Web framework source: https://github.com/karwalski/ooke
+
+## Licence
+
+The formulae in this tap are MIT-licensed; see [LICENSE](LICENSE). The software
+they install carries its own licence: `tkc` is Apache-2.0, with its standard library
+under MIT (see [LICENSING.md](https://github.com/karwalski/toke/blob/main/LICENSING.md)),
+and `ooke` is MIT.
