@@ -18,6 +18,10 @@ release artefacts they download are published (toke story 132.27); until
 then `brew install` fails its checksum check. Build from source meanwhile:
 see the compiler and framework repositories linked below.
 
+The formulae pin `version "3.0.0"` for both `tkc` and `ooke`. toke's current
+version is 3.1.0, and ooke 3.0.0 is still a release candidate (`3.0.0-rc.2`),
+so both pins change when the release artefacts are published.
+
 ## Installation
 
 ```sh
@@ -28,7 +32,11 @@ brew install ooke
 
 ## What it installs
 
-- `tkc` -- the toke compiler binary, plus standard library files
+- `tkc` -- the toke compiler binary, plus the standard library interfaces
+  (`stdlib/*.tki`, `stdlib/vendor/`) and runtime sources (`src/stdlib/`) every
+  program links, installed under `libexec`. tkc runs the clang found where the
+  release was built; if builds fail with E9027, set `TKC_CC` (the formula's caveats
+  say how)
 - `ooke` -- toke's web framework and static site generator, for building toke-based websites
 
 ## Updating
@@ -44,6 +52,7 @@ brew upgrade ooke
 - macOS (Apple Silicon / arm64)
 - macOS (Intel / x86_64)
 - Linux (x86_64)
+- Linux (arm64)
 
 ## Links
 
