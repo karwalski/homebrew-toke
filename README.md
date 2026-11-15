@@ -13,14 +13,16 @@ and nowhere else.
 
 ## Status
 
-**Not installable yet.** The formulae carry placeholder checksums until the
-release artefacts they download are published (toke story 132.27); until
-then `brew install` fails its checksum check. Build from source meanwhile:
-see the compiler and framework repositories linked below.
+The formulae install the published releases: **tkc 3.2.0** (toke v3.2.0, 2026-11-15) and
+**ooke 3.0.0** (2026-11-15), each pinned to the sha256 values in its release's
+`checksums.txt`.
 
-The formulae pin `version "3.0.0"` for both `tkc` and `ooke`. toke's current
-version is 3.1.0, and ooke 3.0.0 is still a release candidate (`3.0.0-rc.2`),
-so both pins change when the release artefacts are published.
+**Requirements.** macOS 15 (Sequoia) or later: the release binaries are built on GitHub's
+macos-15 images. On Linux the binaries need glibc 2.38 or later (Ubuntu 24.04+, Debian 13+,
+Fedora 39+); older systems can build from source (see the repositories linked below). tkc
+compiles programs with clang; on macOS that is the Command Line Tools clang
+(`xcode-select --install`), and `brew install` pulls in openssl@4 for programs that use
+std.http, std.llm or std.encrypt.
 
 ## Installation
 
